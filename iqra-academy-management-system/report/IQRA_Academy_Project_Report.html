@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IQRA Academy – Project Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Georgia&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 12pt;
+      color: #1a1a1a;
+      background: #f5f5f5;
+      line-height: 1.7;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: white;
+      margin: 0 auto 20px;
+      padding: 25mm 25mm 20mm 30mm;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    /* ── Cover Page ── */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 257mm;
+      padding: 40px 0;
+    }
+
+    .cover-top-line {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #1e40af, #2563eb, #3b82f6);
+      margin-bottom: 30px;
+      border-radius: 3px;
+    }
+
+    .cover-logo-circle {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #1e40af, #2563eb);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      border: 4px solid #93c5fd;
+    }
+
+    .cover-logo-circle span {
+      font-size: 36pt;
+      font-weight: 900;
+      color: white;
+      font-family: Georgia, serif;
+    }
+
+    .cover-uni { font-size: 11pt; color: #2563eb; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; margin-bottom: 8px; }
+    .cover-dept { font-size: 10pt; color: #64748b; margin-bottom: 30px; }
+
+    .cover-divider {
+      width: 80px; height: 3px;
+      background: #2563eb;
+      margin: 20px auto;
+      border-radius: 2px;
+    }
+
+    .cover-title {
+      font-size: 22pt;
+      font-weight: 900;
+      color: #0f172a;
+      font-family: Georgia, serif;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .cover-subtitle {
+      font-size: 14pt;
+      color: #2563eb;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .cover-motto {
+      font-size: 11pt;
+      color: #64748b;
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+
+    .cover-info-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 20px 30px;
+      text-align: left;
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    .cover-info-box table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cover-info-box td {
+      padding: 6px 8px;
+      font-size: 10.5pt;
+    }
+
+    .cover-info-box td:first-child {
+      font-weight: 700;
+      color: #1e40af;
+      width: 40%;
+    }
+
+    .cover-bottom-line {
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #1e40af, #2563eb, #3b82f6);
+      margin-top: 30px;
+      border-radius: 3px;
+    }
+
+    /* ── Sections ── */
+    h1 {
+      font-size: 16pt;
+      font-weight: 900;
+      color: #1e40af;
+      font-family: Georgia, serif;
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      margin-top: 30px;
+    }
+
+    h1:first-of-type { margin-top: 0; }
+
+    h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #1e40af;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: #334155;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    p { margin-bottom: 10px; text-align: justify; }
+
+    ul, ol { margin: 8px 0 12px 24px; }
+    li { margin-bottom: 4px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 10.5pt;
+    }
+
+    thead th {
+      background: #1e40af;
+      color: white;
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    tbody td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    tbody tr:nth-child(even) td { background: #f8fafc; }
+
+    .highlight-box {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      padding: 12px 16px;
+      margin: 14px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .page-number {
+      text-align: center;
+      font-size: 9pt;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 10px;
+      margin-top: 30px;
+    }
+
+    .toc-entry {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px dotted #cbd5e1;
+      font-size: 11pt;
+    }
+
+    .toc-entry .toc-title { color: #1e40af; font-weight: 600; }
+    .toc-entry .toc-page  { color: #64748b; }
+
+    .section-label {
+      display: inline-block;
+      background: #1e40af;
+      color: white;
+      font-size: 9pt;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .feature-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+
+    .feature-item strong {
+      display: block;
+      color: #1e40af;
+      font-size: 10.5pt;
+      margin-bottom: 3px;
+    }
+
+    .feature-item span { font-size: 9.5pt; color: #64748b; }
+
+    @media print {
+      body { background: white; }
+      .page { box-shadow: none; margin: 0; page-break-after: always; }
+      .page:last-child { page-break-after: avoid; }
+      .no-print { display: none !important; }
+    }
+
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.4);
+      z-index: 999;
+      font-family: system-ui, sans-serif;
+    }
+
+    .print-btn:hover { background: #1d4ed8; }
+  </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 1 – COVER PAGE
+═══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="cover-page">
+    <div class="cover-top-line"></div>
+
+    <div class="cover-logo-circle"><span>IQ</span></div>
+
+    <div class="cover-uni">IQRA Academy</div>
+    <div class="cover-dept">Department of Computer Information Technology</div>
+
+    <div class="cover-divider"></div>
+
+    <div class="cover-title">Student Management System</div>
+    <div class="cover-subtitle">Professional Software Project Report</div>
+    <div class="cover-motto">"Learn • Grow • Succeed"</div>
+
+    <div class="cover-info-box">
+      <table>
+        <tr><td>Project Title:</td><td>IQRA Academy Student Management System</td></tr>
+        <tr><td>Project Type:</td><td>Frontend Web Application (ERP-Style)</td></tr>
+        <tr><td>Technologies:</td><td>HTML5 · CSS3 · Vanilla JavaScript · LocalStorage</td></tr>
+        <tr><td>Additional Libraries:</td><td>Chart.js 4.4 · Font Awesome 6.5</td></tr>
+        <tr><td>Subject:</td><td>Final Year / Semester Project</td></tr>
+        <tr><td>Submitted To:</td><td>IQRA Academy Faculty</td></tr>
+        <tr><td>Date:</td><td>June 2025</td></tr>
+      </table>
+    </div>
+
+    <div class="cover-bottom-line"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 2 – TABLE OF CONTENTS
+═══════════════════════════════════════════════ -->
+<div class="page">
+  <h1>Table of Contents</h1>
+
+  <div class="toc-entry"><span class="toc-title">1. Abstract</span><span class="toc-page">3</span></div>
+  <div class="toc-entry"><span class="toc-title">2. Introduction</span><span class="toc-page">3</span></div>
+  <div class="toc-entry"><span class="toc-title">3. Problem Statement</span><span class="toc-page">3</span></div>
+  <div class="toc-entry"><span class="toc-title">4. Objectives</span><span class="toc-page">4</span></div>
+  <div class="toc-entry"><span class="toc-title">5. Scope of the Project</span><span class="toc-page">4</span></div>
+  <div class="toc-entry"><span class="toc-title">6. System Features</span><span class="toc-page">4</span></div>
+  <div class="toc-entry"><span class="toc-title">7. Technology Stack</span><span class="toc-page">5</span></div>
+  <div class="toc-entry"><span class="toc-title">8. System Architecture</span><span class="toc-page">6</span></div>
+  <div class="toc-entry"><span class="toc-title">9. Database Alternative – LocalStorage Design</span><span class="toc-page">6</span></div>
+  <div class="toc-entry"><span class="toc-title">10. User Interface Description</span><span class="toc-page">7</span></div>
+  <div class="toc-entry"><span class="toc-title">11. Course & Faculty Information</span><span class="toc-page">8</span></div>
+  <div class="toc-entry"><span class="toc-title">12. Testing</span><span class="toc-page">8</span></div>
+  <div class="toc-entry"><span class="toc-title">13. Future Enhancements</span><span class="toc-page">9</span></div>
+  <div class="toc-entry"><span class="toc-title">14. Conclusion</span><span class="toc-page">9</span></div>
+  <div class="toc-entry"><span class="toc-title">15. References</span><span class="toc-page">9</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 3 – Abstract, Introduction, Problem
+═══════════════════════════════════════════════ -->
+<div class="page">
+
+  <h1>1. Abstract</h1>
+  <p>
+    The IQRA Academy Student Management System (IASMS) is a comprehensive, client-side web application developed to digitize and streamline the administrative operations of IQRA Academy. Built entirely with frontend technologies — HTML5, CSS3, and Vanilla JavaScript — without any backend server or database, the system leverages the browser's native <strong>LocalStorage API</strong> for complete data persistence.
+  </p>
+  <p>
+    The system encompasses a full-featured ERP experience including secure login authentication, dashboard analytics with real-time charts, student enrollment and management (CRUD), date-wise attendance tracking, monthly fee management, and system settings with dark mode support. The interface follows modern UI/UX principles including glassmorphism, responsive design, and professional blue theming — making it suitable for university project submission, portfolio showcase, and internship demonstration.
+  </p>
+
+  <h1>2. Introduction</h1>
+  <p>
+    In the digital age, educational institutions require efficient, reliable, and user-friendly systems to manage their day-to-day administrative tasks. IQRA Academy, a forward-thinking educational institution operating under the motto <em>"Learn • Grow • Succeed,"</em> recognized the need for a centralized platform to manage student records, track attendance, and handle fee collection without the complexity and cost of a full-stack application.
+  </p>
+  <p>
+    This project presents a modern, purely frontend solution that addresses all core administrative needs of the academy. By utilizing the powerful capabilities of modern browsers — including LocalStorage, CSS custom properties, and ES6+ JavaScript — the system provides a fully functional ERP interface that requires zero installation, zero server configuration, and zero database setup. It runs directly in any modern web browser.
+  </p>
+  <p>
+    The system was designed with three key audiences in mind: the Academy Administrator who needs a daily-use tool, the Computer Science student who can study and extend the codebase, and the frontend developer who can demonstrate professional skills through this portfolio-quality project.
+  </p>
+
+  <h1>3. Problem Statement</h1>
+  <p>
+    Prior to the development of this system, IQRA Academy faced the following challenges in its administrative processes:
+  </p>
+  <ul>
+    <li><strong>Manual Record Keeping:</strong> Student enrollment data was maintained in physical registers, leading to data loss, illegibility, and difficulty in retrieval.</li>
+    <li><strong>Inefficient Attendance Tracking:</strong> Daily attendance was recorded on paper, making it impossible to calculate overall attendance percentages quickly or identify habitually absent students.</li>
+    <li><strong>Unorganized Fee Management:</strong> Fee payment status was tracked informally, often leading to errors in collection and difficulty in generating financial summaries.</li>
+    <li><strong>No Real-time Analytics:</strong> Management had no quick overview of key statistics such as enrollment per course, attendance rates, or fee collection totals.</li>
+    <li><strong>Cost and Complexity Barrier:</strong> Deploying a full-stack system would require server infrastructure, database management, and ongoing maintenance costs — prohibitive for a small to medium-sized academy.</li>
+  </ul>
+
+  <div class="page-number">Page 3 | IQRA Academy Student Management System – Project Report</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 4 – Objectives, Scope, Features
+═══════════════════════════════════════════════ -->
+<div class="page">
+
+  <h1>4. Objectives</h1>
+  <p>The primary objectives of the IQRA Academy Student Management System are:</p>
+  <ol>
+    <li>To develop a fully functional, browser-based Student Management System that requires no backend infrastructure.</li>
+    <li>To implement secure authentication with session management using browser storage APIs.</li>
+    <li>To provide a comprehensive student enrollment module with automatic roll number generation and teacher assignment.</li>
+    <li>To build a date-based attendance management system with percentage calculations and bulk operations.</li>
+    <li>To create a monthly fee management module with instant toggle updates and financial summaries.</li>
+    <li>To present real-time data visualizations using Chart.js for informed administrative decision-making.</li>
+    <li>To deliver a responsive, accessible, and visually professional ERP-style interface.</li>
+    <li>To demonstrate the full capability of pure frontend technologies in building enterprise-grade applications.</li>
+  </ol>
+
+  <h1>5. Scope of the Project</h1>
+  <div class="highlight-box">
+    <strong>In Scope:</strong> Student CRUD, automated roll numbers, teacher assignment, date-wise attendance with bulk marking, monthly fee tracking, dashboard analytics, dark mode, password management, LocalStorage persistence, responsive UI, toast notifications.
+  </div>
+  <div class="highlight-box">
+    <strong>Out of Scope:</strong> Backend API, database server, multi-user concurrent access, email notifications, file uploads, PDF export (in v1.0), mobile app version.
+  </div>
+  <p>The system is intended for single-admin use within a single browser session. Data is stored locally per browser and does not synchronize across devices or users.</p>
+
+  <h1>6. System Features</h1>
+
+  <div class="feature-grid">
+    <div class="feature-item">
+      <strong>🔐 Authentication System</strong>
+      <span>Secure login with sessionStorage, route protection on all pages, logout, password change</span>
+    </div>
+    <div class="feature-item">
+      <strong>📊 Dashboard Analytics</strong>
+      <span>7 stat cards, 3 Chart.js charts (bar + 2 doughnut), recent admissions table, live clock</span>
+    </div>
+    <div class="feature-item">
+      <strong>👨‍🎓 Student Management</strong>
+      <span>Full CRUD, real-time search by 4 fields, course/gender filter, auto roll no. & teacher</span>
+    </div>
+    <div class="feature-item">
+      <strong>📅 Attendance Tracking</strong>
+      <span>Date-picker, per-student toggle, bulk mark all, attendance % calculation, course filter</span>
+    </div>
+    <div class="feature-item">
+      <strong>💰 Fee Management</strong>
+      <span>Monthly tracker, one-click toggle, green row for paid, financial stats, no save button</span>
+    </div>
+    <div class="feature-item">
+      <strong>⚙️ Settings</strong>
+      <span>Dark mode toggle, admin password change with validation, system info, data clear</span>
+    </div>
+    <div class="feature-item">
+      <strong>🎨 Modern UI/UX</strong>
+      <span>Glassmorphism, responsive sidebar, navbar, toast notifications, animations, hover effects</span>
+    </div>
+    <div class="feature-item">
+      <strong>📱 Full Responsiveness</strong>
+      <span>Mobile (≤480px), Tablet (≤768px), Desktop (≥1200px) breakpoints with adaptive layout</span>
+    </div>
+  </div>
+
+  <div class="page-number">Page 4 | IQRA Academy Student Management System – Project Report</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 5 – Tech Stack, Architecture, LocalStorage
+═══════════════════════════════════════════════ -->
+<div class="page">
+
+  <h1>7. Technology Stack</h1>
+
+  <table>
+    <thead>
+      <tr><th>Technology</th><th>Version</th><th>Purpose</th><th>Justification</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>HTML5</td><td>Latest</td><td>Page structure and semantics</td><td>Standard web markup; semantic elements for accessibility</td></tr>
+      <tr><td>CSS3</td><td>Latest</td><td>Styling, animations, layout</td><td>Custom properties, Flexbox, Grid, media queries, glassmorphism</td></tr>
+      <tr><td>Vanilla JavaScript</td><td>ES6+</td><td>Application logic, DOM manipulation</td><td>Zero dependencies; demonstrates core JS mastery</td></tr>
+      <tr><td>LocalStorage API</td><td>Browser Native</td><td>Data persistence</td><td>No server required; survives browser refresh</td></tr>
+      <tr><td>SessionStorage API</td><td>Browser Native</td><td>Login session</td><td>Clears on tab close for security</td></tr>
+      <tr><td>Chart.js</td><td>4.4.0</td><td>Interactive data charts</td><td>Lightweight, responsive, feature-rich charting library</td></tr>
+      <tr><td>Font Awesome</td><td>6.5.0</td><td>Icon library</td><td>Comprehensive icon set; CDN delivery</td></tr>
+      <tr><td>Google Fonts (Inter)</td><td>Latest</td><td>Typography</td><td>Modern, highly legible, professional typeface</td></tr>
+    </tbody>
+  </table>
+
+  <h1>8. System Architecture</h1>
+  <p>The system follows a <strong>Single-Page Application (SPA) inspired Multi-Page Architecture</strong>:</p>
+
+  <h3>Page Layer</h3>
+  <p>Six HTML pages (index, dashboard, students, attendance, fees, settings) each load their specific JS module after the shared <code>auth.js</code> base module.</p>
+
+  <h3>Module Layer</h3>
+  <ul>
+    <li><code>auth.js</code> — Shared foundation: authentication, layout init, toast system, shared data helpers, course/teacher constants</li>
+    <li><code>dashboard.js</code> — Statistics computation + Chart.js rendering</li>
+    <li><code>students.js</code> — Student CRUD, search, auto roll number, modal management</li>
+    <li><code>attendance.js</code> — Date-based attendance marking, percentage calculation</li>
+    <li><code>fees.js</code> — Monthly fee status toggle, financial statistics</li>
+    <li><code>settings.js</code> — Dark mode, password management, data operations</li>
+  </ul>
+
+  <h3>Data Layer</h3>
+  <p>All data is stored in <code>localStorage</code> as JSON-serialized objects. Data is read and written directly within each module using shared helper functions defined in <code>auth.js</code>.</p>
+
+  <h1>9. Database Alternative – LocalStorage Design</h1>
+
+  <table>
+    <thead>
+      <tr><th>Key</th><th>Storage Type</th><th>Data Format</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>iqra_session</code></td><td>sessionStorage</td><td>JSON Object</td><td>Login session data (username, loginTime)</td></tr>
+      <tr><td><code>iqra_students</code></td><td>localStorage</td><td>JSON Array</td><td>All student records (complete objects)</td></tr>
+      <tr><td><code>iqra_attendance</code></td><td>localStorage</td><td>JSON Object</td><td>Nested: {rollNo: {YYYY-MM-DD: 'present'/'absent'}}</td></tr>
+      <tr><td><code>iqra_fees</code></td><td>localStorage</td><td>JSON Object</td><td>Nested: {rollNo: {YYYY-MM: 'paid'/'unpaid'}}</td></tr>
+      <tr><td><code>iqra_settings</code></td><td>localStorage</td><td>JSON Object</td><td>User preferences {darkMode: boolean}</td></tr>
+      <tr><td><code>iqra_admin_password</code></td><td>localStorage</td><td>String</td><td>Admin password (plain text, v1.0)</td></tr>
+      <tr><td><code>iqra_counter_{CODE}</code></td><td>localStorage</td><td>Integer</td><td>Roll number counter per course (ENG, PHY, etc.)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Student Object Schema</h3>
+  <div class="highlight-box">
+    <code>{ rollNumber: "ENG-001", studentName: "Ali Ahmed", fatherName: "Ahmed Khan", gender: "Male", mobile: "03001234567", courseCode: "ENG", courseName: "English", teacher: "Sir Khalid Mehmood Soomro", monthlyFee: 1500, admissionDate: "2025-06-10" }</code>
+  </div>
+
+  <div class="page-number">Page 5 | IQRA Academy Student Management System – Project Report</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 6 – UI Description, Courses
+═══════════════════════════════════════════════ -->
+<div class="page">
+
+  <h1>10. User Interface Description</h1>
+
+  <h2>10.1 Login Page (index.html)</h2>
+  <p>The login page features a full-screen gradient background (dark navy to royal blue) with animated floating particles and a glassmorphism login card. The card contains the IQRA Academy logo icon, branding text, username/password fields with icons, a password visibility toggle, and a gradient sign-in button. Demo credentials are displayed for convenience.</p>
+
+  <h2>10.2 Dashboard (dashboard.html)</h2>
+  <p>The dashboard provides an executive overview with:</p>
+  <ul>
+    <li><strong>Statistics Grid:</strong> 7 color-coded glassmorphism stat cards (blue, indigo, purple, green, red, teal, orange) with animated number counting on load</li>
+    <li><strong>Charts Row:</strong> Students per Course (bar chart), Attendance Overview (doughnut), Fee Status (doughnut) — all responsive and theme-aware</li>
+    <li><strong>Recent Admissions Table:</strong> Latest 8 students with avatar initials, roll number badges, and formatted dates</li>
+  </ul>
+
+  <h2>10.3 Student Management (students.html)</h2>
+  <p>A professional data table with all student records. Features a search bar (real-time, searches 4 fields simultaneously), course and gender dropdowns, and result counter. The Add/Edit modal (glass overlay) contains a 9-field form with auto-assignment behaviors. A confirmation dialog with emoji prevents accidental deletions.</p>
+
+  <h2>10.4 Attendance (attendance.html)</h2>
+  <p>Date picker defaults to today's date. 4 stat cards show real-time counts. Each student row has a segmented control with Present/Absent buttons that highlight green/red when active. Click the same button again to unmark. "Mark All" buttons enable bulk operations. The "Overall %" column shows calculated attendance rates with color coding.</p>
+
+  <h2>10.5 Fee Management (fees.html)</h2>
+  <p>A month picker (input type="month") controls the billing period. 4 financial stat cards show paid count, unpaid count, total collection, and pending amount. Each table row has a custom checkbox — clicking it instantly toggles paid/unpaid status and saves to LocalStorage without any save button. Paid rows get a green background highlight and a green "Paid" badge.</p>
+
+  <h2>10.6 Settings (settings.html)</h2>
+  <p>Clean settings layout with card-style sections. The Appearance section has a custom CSS toggle switch for dark mode. The Password section has three fields with individual visibility toggles and client-side validation. The System Information section shows read-only stats. The Danger Zone (red border) has a "Clear All Data" button with a confirmation modal.</p>
+
+  <h2>10.7 Layout System</h2>
+  <p>All authenticated pages share a consistent layout: a <strong>260px fixed sidebar</strong> (dark navy gradient) with brand logo, navigation items, and user info footer; a <strong>64px sticky navbar</strong> with sidebar toggle (mobile), breadcrumb, clock, and theme toggle; and a flexible <strong>main content area</strong> (max-width 1400px, centered). On mobile (≤768px), the sidebar slides in from the left with an overlay backdrop.</p>
+
+  <h1>11. Course & Faculty Information</h1>
+
+  <table>
+    <thead>
+      <tr><th>Course Name</th><th>Code</th><th>Teacher</th><th>Monthly Fee</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>English</td><td>ENG</td><td>Sir Khalid Mehmood Soomro</td><td>Rs. 1,500</td></tr>
+      <tr><td>Physics</td><td>PHY</td><td>Sir Mashooque</td><td>Rs. 1,800</td></tr>
+      <tr><td>Chemistry</td><td>CHE</td><td>Sir Zaheer Abbas</td><td>Rs. 1,800</td></tr>
+      <tr><td>Mathematics</td><td>MAT</td><td>Sir Mazhar Baloch</td><td>Rs. 1,800</td></tr>
+      <tr><td>Biology</td><td>BIO</td><td>Sir Muneer Ahmed Shaikh</td><td>Rs. 1,800</td></tr>
+      <tr><td>Computer Information Technology</td><td>CIT</td><td>Sir Muhammad Ali Shaikh</td><td>Rs. 2,000</td></tr>
+    </tbody>
+  </table>
+
+  <p>Teacher assignment is fully automatic — when a student selects a course, the corresponding teacher populates instantly in the read-only Teacher field. Roll numbers follow the format <strong>CODE-NNN</strong> (e.g., ENG-001, CIT-007) and are generated sequentially using per-course counters stored in LocalStorage. Once assigned, a roll number is never reused even if the student is deleted.</p>
+
+  <div class="page-number">Page 6 | IQRA Academy Student Management System – Project Report</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 7 – Testing, Future, Conclusion
+═══════════════════════════════════════════════ -->
+<div class="page">
+
+  <h1>12. Testing</h1>
+
+  <h2>12.1 Functional Testing</h2>
+  <table>
+    <thead>
+      <tr><th>Test Case</th><th>Input</th><th>Expected Output</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Valid Login</td><td>admin / admin123</td><td>Redirect to dashboard</td><td>✅ Pass</td></tr>
+      <tr><td>Invalid Login</td><td>admin / wrongpass</td><td>Error message shown</td><td>✅ Pass</td></tr>
+      <tr><td>Route Protection</td><td>Direct URL to dashboard.html without login</td><td>Redirect to index.html</td><td>✅ Pass</td></tr>
+      <tr><td>Add Student</td><td>All fields filled, course=ENG</td><td>Student added, roll ENG-001, teacher assigned, toast shown</td><td>✅ Pass</td></tr>
+      <tr><td>Auto Roll Number</td><td>Add 3 ENG students</td><td>ENG-001, ENG-002, ENG-003 (no repeats)</td><td>✅ Pass</td></tr>
+      <tr><td>Validation – Empty Form</td><td>Submit with blank fields</td><td>Toast error: "Please fill all required fields"</td><td>✅ Pass</td></tr>
+      <tr><td>Edit Student</td><td>Change name of existing student</td><td>Updated in table, toast confirmation</td><td>✅ Pass</td></tr>
+      <tr><td>Delete Student</td><td>Click delete, confirm</td><td>Student removed, toast shown</td><td>✅ Pass</td></tr>
+      <tr><td>Real-time Search</td><td>Type "ali" in search box</td><td>Table filters instantly to matching students</td><td>✅ Pass</td></tr>
+      <tr><td>Mark Attendance</td><td>Click 🟢 Present for student</td><td>Button highlights green, saved to LocalStorage</td><td>✅ Pass</td></tr>
+      <tr><td>Bulk Mark Present</td><td>Click "Mark All Present"</td><td>All visible students marked present</td><td>✅ Pass</td></tr>
+      <tr><td>Attendance %</td><td>3 days: 2 present, 1 absent</td><td>66% displayed in orange</td><td>✅ Pass</td></tr>
+      <tr><td>Fee Toggle</td><td>Click checkbox for student</td><td>Instant save, row turns green, badge changes to Paid</td><td>✅ Pass</td></tr>
+      <tr><td>Dark Mode</td><td>Toggle dark mode</td><td>Theme switches, preference saved in LocalStorage</td><td>✅ Pass</td></tr>
+      <tr><td>Change Password</td><td>Correct current, new=confirm</td><td>Password updated, form cleared, toast shown</td><td>✅ Pass</td></tr>
+    </tbody>
+  </table>
+
+  <h2>12.2 Compatibility Testing</h2>
+  <table>
+    <thead>
+      <tr><th>Browser</th><th>Version</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Google Chrome</td><td>120+</td><td>✅ Full Support</td></tr>
+      <tr><td>Mozilla Firefox</td><td>120+</td><td>✅ Full Support</td></tr>
+      <tr><td>Microsoft Edge</td><td>120+</td><td>✅ Full Support</td></tr>
+      <tr><td>Safari</td><td>17+</td><td>✅ Full Support</td></tr>
+    </tbody>
+  </table>
+
+  <h2>12.3 Responsive Testing</h2>
+  <table>
+    <thead>
+      <tr><th>Device Type</th><th>Screen Width</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Mobile (Portrait)</td><td>360px – 480px</td><td>✅ Sidebar collapses, 2-col stats grid, stacked form</td></tr>
+      <tr><td>Tablet</td><td>481px – 768px</td><td>✅ Slide-in sidebar, auto-fit stats, scrollable tables</td></tr>
+      <tr><td>Laptop</td><td>769px – 1200px</td><td>✅ Fixed sidebar, adaptive charts grid</td></tr>
+      <tr><td>Desktop</td><td>1200px+</td><td>✅ Full layout, 7-column stats grid, clock visible</td></tr>
+    </tbody>
+  </table>
+
+  <h1>13. Future Enhancements</h1>
+  <ul>
+    <li>Export student, attendance, and fee reports to <strong>PDF / Excel</strong></li>
+    <li>Student and teacher profile <strong>photo upload</strong></li>
+    <li>Academic <strong>performance tracking</strong> and gradebook module</li>
+    <li><strong>Timetable management</strong> with subject scheduling</li>
+    <li><strong>Multi-admin</strong> support with role-based access control</li>
+    <li><strong>SMS/Email notifications</strong> for fee reminders and absentee alerts</li>
+    <li>Student/parent <strong>self-service portal</strong> with read-only access</li>
+    <li>Backend integration with <strong>Node.js + MongoDB</strong> for multi-device sync</li>
+    <li><strong>Biometric attendance</strong> system integration</li>
+    <li>Auto-generated <strong>admission certificates</strong> and fee receipts</li>
+  </ul>
+
+  <h1>14. Conclusion</h1>
+  <p>
+    The IQRA Academy Student Management System successfully achieves all its stated objectives. By leveraging modern browser APIs and pure frontend technologies, the system delivers a professional, enterprise-grade ERP experience without any backend infrastructure. The modular JavaScript architecture ensures maintainability and extensibility, while the responsive CSS design guarantees usability across all device types.
+  </p>
+  <p>
+    This project demonstrates that fully-featured management systems can be built effectively using only HTML, CSS, and JavaScript — making such applications accessible to institutions that cannot afford complex infrastructure, and proving the depth of capability available to skilled frontend developers.
+  </p>
+  <p>
+    The system is immediately deployable, requiring nothing more than a modern web browser. It is suitable for real-world use at IQRA Academy and serves as a strong portfolio piece demonstrating advanced frontend development skills.
+  </p>
+
+  <h1>15. References</h1>
+  <ul>
+    <li>MDN Web Docs. <em>LocalStorage API.</em> https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage</li>
+    <li>Chart.js Documentation. <em>Getting Started.</em> https://www.chartjs.org/docs/latest/</li>
+    <li>Font Awesome. <em>Icon Library Documentation.</em> https://fontawesome.com/docs</li>
+    <li>Google Fonts. <em>Inter Typeface.</em> https://fonts.google.com/specimen/Inter</li>
+    <li>CSS-Tricks. <em>A Complete Guide to CSS Grid.</em> https://css-tricks.com/snippets/css/complete-guide-grid/</li>
+    <li>Nielsen Norman Group. <em>UX Design Principles.</em> https://www.nngroup.com/</li>
+  </ul>
+
+  <div class="page-number">Page 7 | IQRA Academy Student Management System – Project Report | © 2025 IQRA Academy</div>
+</div>
+
+</body>
+</html>

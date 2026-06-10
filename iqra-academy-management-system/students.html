@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Students – IQRA Academy</title>
+  <meta name="description" content="IQRA Academy – Student Management: Add, Edit, Delete and Search Students" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="brand-text"><h2>IQRA Academy</h2><span>Management System</span></div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="dashboard.html" class="nav-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="students.html"  class="nav-item active"><i class="fas fa-user-graduate"></i> Students</a>
+      <div class="nav-section-label" style="margin-top:.5rem;">Academic</div>
+      <a href="attendance.html" class="nav-item"><i class="fas fa-clipboard-check"></i> Attendance</a>
+      <a href="fees.html"       class="nav-item"><i class="fas fa-money-bill-wave"></i> Fee Management</a>
+      <div class="nav-section-label" style="margin-top:.5rem;">System</div>
+      <a href="settings.html"   class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">A</div>
+        <div class="user-info"><strong>Administrator</strong><span>admin@iqra.edu</span></div>
+        <button class="btn-logout logout-btn" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main-wrapper">
+    <header class="navbar">
+      <button class="navbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+      <div class="navbar-breadcrumb">
+        <i class="fas fa-home"></i><span>/</span>
+        <span class="current-page">Students</span>
+      </div>
+      <div class="navbar-right">
+        <span class="navbar-time" id="navbarTime"></span>
+        <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+      </div>
+    </header>
+
+    <main class="page-content fade-in">
+      <div class="page-header">
+        <div class="page-title-group">
+          <h1><i class="fas fa-user-graduate" style="color:var(--primary-500);margin-right:.4rem;"></i> Student Management</h1>
+          <p>Add, edit, delete and search student records.</p>
+        </div>
+        <button class="btn btn-primary" id="btnAddStudent">
+          <i class="fas fa-plus"></i> Add Student
+        </button>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-body" style="padding:.85rem 1.25rem;">
+          <div class="toolbar">
+            <div class="search-bar" style="max-width:360px; flex:1;">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" id="searchInput" placeholder="Search by name, roll no., course or teacher…" />
+            </div>
+            <select id="filterCourse" class="form-control" style="width:auto; min-width:160px;">
+              <option value="">All Courses</option>
+              <option value="ENG">English</option>
+              <option value="PHY">Physics</option>
+              <option value="CHE">Chemistry</option>
+              <option value="MAT">Mathematics</option>
+              <option value="BIO">Biology</option>
+              <option value="CIT">Computer IT</option>
+            </select>
+            <select id="filterGender" class="form-control" style="width:auto; min-width:130px;">
+              <option value="">All Genders</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <span id="resultCount" class="text-muted" style="white-space:nowrap;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Students Table -->
+      <div class="card">
+        <div class="card-body" style="padding:0;">
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Roll No.</th>
+                  <th>Student Name</th>
+                  <th>Father Name</th>
+                  <th>Gender</th>
+                  <th>Mobile</th>
+                  <th>Course</th>
+                  <th>Teacher</th>
+                  <th>Monthly Fee</th>
+                  <th>Admission</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="studentsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ══ Add / Edit Student Modal ══════════════════════════ -->
+<div class="modal-backdrop" id="studentModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle"><i class="fas fa-user-plus"></i> Add New Student</h3>
+      <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="studentForm" novalidate>
+        <input type="hidden" id="editIndex" value="-1" />
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="studentName">Student Name <span class="required">*</span></label>
+            <input type="text" id="studentName" class="form-control" placeholder="Full name" required />
+          </div>
+          <div class="form-group">
+            <label for="fatherName">Father Name <span class="required">*</span></label>
+            <input type="text" id="fatherName" class="form-control" placeholder="Father's full name" required />
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender <span class="required">*</span></label>
+            <select id="gender" class="form-control" required>
+              <option value="">Select Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mobile">Mobile Number <span class="required">*</span></label>
+            <input type="tel" id="mobile" class="form-control" placeholder="03XX-XXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label for="course">Course <span class="required">*</span></label>
+            <select id="course" class="form-control" required>
+              <option value="">Select Course</option>
+              <option value="ENG">English</option>
+              <option value="PHY">Physics</option>
+              <option value="CHE">Chemistry</option>
+              <option value="MAT">Mathematics</option>
+              <option value="BIO">Biology</option>
+              <option value="CIT">Computer Information Technology</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="teacher">Teacher (Auto Assigned)</label>
+            <input type="text" id="teacher" class="form-control" placeholder="Select a course first" disabled />
+          </div>
+          <div class="form-group">
+            <label for="rollNumber">Roll Number (Auto Generated)</label>
+            <input type="text" id="rollNumber" class="form-control" placeholder="Auto generated" disabled />
+          </div>
+          <div class="form-group">
+            <label for="monthlyFee">Monthly Fee (Rs.) <span class="required">*</span></label>
+            <input type="number" id="monthlyFee" class="form-control" placeholder="e.g. 1500" min="0" required />
+          </div>
+          <div class="form-group">
+            <label for="admissionDate">Admission Date <span class="required">*</span></label>
+            <input type="date" id="admissionDate" class="form-control" required />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" id="modalCancelBtn">Cancel</button>
+      <button class="btn btn-primary" id="saveStudentBtn"><i class="fas fa-save"></i> Save Student</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Confirm Delete Modal ═══════════════════════════════ -->
+<div class="modal-backdrop" id="confirmModal">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-body" style="padding:2rem;">
+      <div class="confirm-dialog">
+        <div class="confirm-icon">🗑️</div>
+        <h3>Delete Student?</h3>
+        <p>This will permanently remove <strong id="deleteStudentName"></strong> from the system. This action cannot be undone.</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
+      <button class="btn btn-danger" id="confirmDeleteBtn"><i class="fas fa-trash"></i> Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/seed.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/students.js"></script>
+</body>
+</html>
